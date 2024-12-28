@@ -1,0 +1,45 @@
+# Ignore node_modules folder for frontend or backend if applicable
+node_modules/
+# Ignore log files
+*.log
+
+# Ignore environment variable files
+.env
+
+# Ignore Visual Studio specific files and folders
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Ignore build directories and output
+bin/
+obj/
+
+# Ignore GitHub and Git specific files
+.github/
+.git/
+
+# Ignore compiled files
+*.dll
+*.exe
+
+# Ignore package lock files (optional if you use package-lock.json or yarn.lock)
+package-lock.json
+yarn.lock
+
+# Ignore IDE specific files
+.idea/
+.vscode/
+
+# Ignore compiled TypeScript files if you're using TypeScript
+*.tsbuildinfo
+
+# Ignore frontend build files (if using a frontend framework)
+Frontend/build/
+Frontend/dist/
+
+# Other common items
+.DS_Store
+Thumbs.db
