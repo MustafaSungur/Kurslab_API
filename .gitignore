@@ -44,4 +44,4 @@ Frontend/dist/
 .DS_Store
 Thumbs.db
 
-wwwroot/upload/
+Education.WebApi/wwwroot/upload/
