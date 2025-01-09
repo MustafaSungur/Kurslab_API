@@ -1,5 +1,6 @@
 ﻿using Education.Business.Core.@abstract;
 using Education.Entity.DTOs.LoginDTO;
+using Education.Entity.Enums;
 using Education.Entity.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -28,9 +29,9 @@ namespace Education.WebApi.Controllers
 			{
 				var applicationUser = await _userManager.FindByEmailAsync(loginRequest.Email);
 
-				if (applicationUser != null && await _userManager.CheckPasswordAsync(applicationUser, loginRequest.Password))
+				if (applicationUser != null && applicationUser.State==State.Active && await _userManager.CheckPasswordAsync(applicationUser, loginRequest.Password))
 				{
-					var token = await _tokenService.GenerateToken(applicationUser);
+					var token = await _tokenService.GenerateToken(applicationUser!);
 					return Ok(new
 					{
 						token,

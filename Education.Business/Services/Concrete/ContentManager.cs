@@ -200,6 +200,7 @@ namespace Education.Business.Services.Concrete
 				return ServiceResult<bool>.FailureResult($"İçerik silinirken bir hata oluştu: {ex.Message}");
 			}
 		}
+		
 		public async Task<ServiceResult<ContentFilterResponseDto>> FilterContents(ContentFilterRequestDto filterRequest)
 		{
 			// Tüm içerikleri veritabanından al, yorum sayısını da içerecek şekilde
@@ -281,9 +282,6 @@ namespace Education.Business.Services.Concrete
 
 			return categoryIds;
 		}
-
-
-
 
 
 		public async Task<ServiceResult<ContentStatisticsResponseDto>> GetContentsStatisticsAsync()

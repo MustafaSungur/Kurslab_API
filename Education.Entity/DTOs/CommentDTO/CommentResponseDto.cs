@@ -22,6 +22,8 @@ namespace Education.Entity.DTOs.CommentDTO
 		public List<CommentLikeResponseDto>? Likes { get; set; }
 
         public DateTime CreatedDate { get; set; }
-    }
+
+        public DateTime? UpdatedDate { get; set; }
+	}
 
 }

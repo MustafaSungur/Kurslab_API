@@ -99,6 +99,7 @@ namespace Education.WebApi.Controllers
 		// Kullanıcı güncelleme
 		[Authorize]
 		[HttpPut("Update/{id}")]
+		[Consumes("multipart/form-data")]
 		public async Task<IActionResult> UpdateUser( string id, [FromForm] ApplicationUserRequestDto updatedUserDto, IFormFile? imageFile)
 		{
 			var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);

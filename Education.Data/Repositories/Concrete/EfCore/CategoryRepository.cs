@@ -23,16 +23,15 @@ namespace Education.Data.Repositories.Concrete.EfCore
 		public async Task<List<CategoryStatistics>> GetCategoryStatisticsAsync()
 		{
 			var categoryStatistics = await _context.Categories
-				.Where(c => c.State != State.Deleted)
+				.Where(c => c.State != State.Deleted)!
+				.Include(c => c.Contents)!
+				.ThenInclude(content => content.ViewedUsers) 
 				.Select(category => new
 				{
 					CategoryName = category.Name,
-					ContentList = category.Contents != null
-						? category.Contents.Where(content => content.State != State.Deleted).ToList()
-						: new List<Content>(),
-					SubCategories = _context.Categories.Where(sc => sc.ParentId == category.Id && sc.State != State.Deleted)
-						.SelectMany(subCategory => subCategory.Contents!.Where(content => content.State != State.Deleted))
-						.ToList()
+					ParentId = category.ParentId,
+					Contents = category.Contents!
+						.Where(content => content.State != State.Deleted) 
 				})
 				.ToListAsync();
 
@@ -40,13 +39,14 @@ namespace Education.Data.Repositories.Concrete.EfCore
 				.Select(c => new CategoryStatistics
 				{
 					CategoryName = c.CategoryName,
-					CourseCount = c.ContentList.Count + c.SubCategories.Count,
-					TotalViews = c.ContentList.Sum(content => content.ViewedUsers?.Count ?? 0) +
-								 c.SubCategories.Sum(content => content.ViewedUsers?.Count ?? 0)
+					CourseCount = c.Contents.Count(), // İçerik sayısını al
+					TotalViews = c.Contents.Sum(content => content.ViewedUsers?.Count ?? 0) 
 				})
 				.ToList();
 
 			return result;
 		}
+
+
 	}
 }
